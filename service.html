@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="angular.min.js"></script>
+<script>
+var app = angular.module('myApp', []);
+
+app.service('mani',function(){
+    this.login=function(x,y){
+	if(x=="admin" && y=="admin"){
+	return true
+	}
+	else 
+	{
+	return false
+	}
+	}
+});
+app.controller('myCtrl', function($scope,$rootScope,mani) {
+   $scope.username='';
+   $scope.password='';
+   $rootScope.login=true;
+   $rootScope.home=false;
+   $scope.submit=function(){
+     var check= mani.login($scope.username,$scope.password)
+   if(check== true){
+   $rootScope.home=true;
+   $rootScope.login=false;
+   $rootScope.message="Home page";
+   }
+   else
+   
+   {
+   $rootScope.home=true;
+   $rootScope.login=false;
+   $rootScope.message="Home page";
+     }
+}
+});
+app.controller('myCtrl1', function($scope) {
+    
+});
+app.controller('myCtrl1', function($scope,$rootScope,mani) {
+   $scope.username='';
+   $scope.password='';
+   $scope.logout= function(){
+   $rootScope.login=true;
+   $rootScope.home=false;
+   }})
+</script>
+</head>
+<body ng-app="myApp">
+
+<div  ng-controller="myCtrl" ng-show="login">
+<form>
+Username: <input type="text" ng-model="Username"><br>
+<br><br>
+Userpassword: <input type="password" ng-model="password"><br>
+<br>
+<br>
+<button ng-click="submit()">login</button>
+</div>
+</form>
+<div ng-controller="myCtrl1" ng-show="home">
+welcome {{message}}
+<button ng-click="logout()">logout</button>
+</div>
+</body>
+</html>
